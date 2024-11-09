@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "pages#home"
+  # root "pages#home"
+  root "flowers#index"
   # devise_for :users, :controllers => { :registrations => "users/registrations" }
   # devise_for :users
 
@@ -7,7 +8,6 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  # root "flowers#index"
   resources :flowers
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
