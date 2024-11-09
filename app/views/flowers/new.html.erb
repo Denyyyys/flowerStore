@@ -1,0 +1,11 @@
+<% content_for :title, "New flower" %>
+
+<h1>New flower</h1>
+
+<%= render "form", flower: @flower %>
+
+<br>
+
+<div>
+  <%= link_to "Back to flowers", flowers_path %>
+</div>

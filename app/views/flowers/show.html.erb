@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @flower %>
+
+<div>
+  <%= link_to "Edit this flower", edit_flower_path(@flower) %> |
+  <%= link_to "Back to flowers", flowers_path %>
+
+  <%= button_to "Destroy this flower", @flower, method: :delete %>
+</div>
