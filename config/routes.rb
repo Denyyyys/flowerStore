@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root "flowers#index"
+  root "pages#home"
+  devise_for :users
+  # root "flowers#index"
   resources :flowers
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
