@@ -17,7 +17,7 @@ class FlowersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create flower" do
     assert_difference("Flower.count") do
-      post flowers_url, params: { flower: { description: @flower.description, imageUrl: @flower.imageUrl, name: @flower.name, price: @flower.price, stock: @flower.stock } }
+      post flowers_url, params: { flower: { description: @flower.description, name: @flower.name, price: @flower.price, stock: @flower.stock } }
     end
 
     assert_redirected_to flower_url(Flower.last)
@@ -34,7 +34,7 @@ class FlowersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update flower" do
-    patch flower_url(@flower), params: { flower: { description: @flower.description, imageUrl: @flower.imageUrl, name: @flower.name, price: @flower.price, stock: @flower.stock } }
+    patch flower_url(@flower), params: { flower: { description: @flower.description, name: @flower.name, price: @flower.price, stock: @flower.stock } }
     assert_redirected_to flower_url(@flower)
   end
 

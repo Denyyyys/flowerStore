@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_09_184735) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_18_002712) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,13 +43,36 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_09_184735) do
   end
 
   create_table "flowers", force: :cascade do |t|
-    t.string "imageUrl"
     t.string "name"
     t.string "description"
     t.decimal "price"
     t.integer "stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "flower_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flower_id"], name: "index_order_items_on_flower_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "total_price"
+    t.string "city", null: false
+    t.string "street", null: false
+    t.string "post_index", null: false
+    t.string "house_number", null: false
+    t.string "apartment_number", null: false
+    t.string "order_status", default: "pending", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,6 +87,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_09_184735) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "username", null: false
+    t.decimal "savings", precision: 15, scale: 2, default: "0.0"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -71,4 +95,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_09_184735) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "order_items", "flowers"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "users"
 end

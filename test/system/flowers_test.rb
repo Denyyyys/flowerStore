@@ -15,7 +15,6 @@ class FlowersTest < ApplicationSystemTestCase
     click_on "New flower"
 
     fill_in "Description", with: @flower.description
-    fill_in "Imageurl", with: @flower.imageUrl
     fill_in "Name", with: @flower.name
     fill_in "Price", with: @flower.price
     fill_in "Stock", with: @flower.stock
@@ -30,7 +29,6 @@ class FlowersTest < ApplicationSystemTestCase
     click_on "Edit this flower", match: :first
 
     fill_in "Description", with: @flower.description
-    fill_in "Imageurl", with: @flower.imageUrl
     fill_in "Name", with: @flower.name
     fill_in "Price", with: @flower.price
     fill_in "Stock", with: @flower.stock

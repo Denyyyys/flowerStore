@@ -1,8 +1,4 @@
 <div id="<%= dom_id flower %>">
-  <p>
-    <strong>Imageurl:</strong>
-    <%= flower.imageUrl %>
-  </p>
 
   <p>
     <strong>Name:</strong>
@@ -23,5 +19,19 @@
     <strong>Stock:</strong>
     <%= flower.stock %>
   </p>
+
+  <p>
+    <strong>image:</strong>
+
+    <%= image_tag(flower.image, style: "height: 50px;",  alt: "#{flower.name} image", class: "some") %>
+  </p>
+
+  <%#= form_with url: buy_flower_flower_path(@flower), method: :post do |f| %>
+<!--    <div class="form-group">-->
+      <%#= label_tag :amount_flowers_to_buy, "Enter amount f flowers, which you want to add to your cart" %>
+      <%#= number_field_tag :amount_flowers_to_buy, nil, min: 0, step: 1, max: @flower.stock, class: "form-control", required: true %>
+<!--    </div>-->
+    <%#= f.submit "Add to cart", class: "btn btn-primary" %>
+  <%# end %>
 
 </div>

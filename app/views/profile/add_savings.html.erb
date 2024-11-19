@@ -1,0 +1,10 @@
+<h1>Add Savings</h1>
+<%= form_with url: update_savings_profile_path, method: :patch, local: true do |form| %>
+  <div class="field">
+    <%= form.label :savings, "Enter amount to add" %>
+    <%= form.number_field :savings, step: 2, min: 0, value: 10, required: true %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Add Savings" %>
+  </div>
+<% end %>

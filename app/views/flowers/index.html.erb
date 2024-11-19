@@ -1,8 +1,8 @@
-<p style="color: green"><%= notice %></p>
+<!--<p style="color: green"><%#= notice %></p>-->
 
 <% content_for :title, "Flowers" %>
 
-<h1>Flowers <% content_for :smth, "sdfgf" %></h1>
+<h1>Flowers </h1>
 
 <div id="flowers">
   <% @flowers.each do |flower| %>
@@ -12,5 +12,26 @@
     </p>
   <% end %>
 </div>
+
+<br/>
+<% if user_signed_in? %>
+  <p>Welcome, <%= current_user.first_name %> <%= current_user.last_name %>!</p>
+  <!-- or simply use current_user.username if you prefer that -->
+  <%= button_to 'Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+  <br/>
+  <br/>
+  <br/>
+
+<% else %>
+    <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary' %>
+  <br/>
+  <br/>
+  <br/>
+    <%= link_to 'Log In', new_user_session_path, class: 'btn btn-success' %>
+  <br/>
+
+<% end %>
+
+<br/>
 
 <%= link_to "New flower", new_flower_path %>

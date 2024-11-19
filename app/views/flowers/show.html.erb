@@ -2,6 +2,76 @@
 
 <%= render @flower %>
 
+<%= form_with url: add_to_cart_flower_path(@flower), method: :post, html: { id: "add-to-cart-form" } do |f| %>
+  <div>
+    <label for="amount">Amount:</label>
+    <%= number_field_tag :amount, 1, min: 1, max: @flower.stock, required: true, class: "amount-field", data: { behavior: 'set-amount' } %>
+  </div>
+  <%= button_tag submit_tag 'Add to Cart', class: 'submit-button', style: 'cursor: pointer' %>
+<% end %>
+<script>
+    function setAmountField() {
+        const amountField = document.querySelector('[data-behavior="set-amount"]');
+        const flowerId = <%= @flower.id %>;
+
+        if (amountField) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let existingItem = cart.find(item => item.id === flowerId);
+
+            if (existingItem) {
+                amountField.value = existingItem.amount;
+            } else {
+                amountField.value = 1;
+            }
+        }
+    }
+
+    function attachFormListener() {
+        const form = document.getElementById('add-to-cart-form');
+
+        // Check if the event listener has already been attached
+        if (!form || form.dataset.listenerAttached === "true") {
+            return;
+        }
+
+        form.dataset.listenerAttached = "true"; // Mark that the listener has been attached
+
+        setAmountField();
+        const amountField = document.querySelector('.amount-field');
+        const flowerId = <%= @flower.id %>;
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        form.addEventListener('submit', function(event) {
+            console.log("Form submit event triggered");
+
+            event.preventDefault();
+            const amount = parseInt(amountField.value);
+            if (amount >= 1 && amount <= <%= @flower.stock %>) {
+                let existingItemIndex = cart.findIndex(item => item.id === flowerId);
+                if (existingItemIndex !== -1) {
+                    cart[existingItemIndex].amount = amount;
+                } else {
+                    cart.push({ id: flowerId, amount: amount });
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            form.submit();
+        });
+    }
+
+    document.addEventListener('turbo:load', function() {
+        attachFormListener();
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        attachFormListener();
+    });
+</script>
+
+<br/>
+<br/>
+<br/>
 <div>
   <%= link_to "Edit this flower", edit_flower_path(@flower) %> |
   <%= link_to "Back to flowers", flowers_path %>

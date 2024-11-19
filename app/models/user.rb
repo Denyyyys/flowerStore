@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :orders, dependent: :destroy
   validates :username, presence: true, length: { minimum: 3 }, uniqueness: true
   validates :first_name, presence: true, length: { minimum: 3 }
   validates :last_name, presence: true, length: { minimum: 3 }

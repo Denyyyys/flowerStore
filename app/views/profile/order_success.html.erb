@@ -1,0 +1,12 @@
+<h1>Order Confirmation</h1>
+<p><%= flash[:notice] %></p>
+<p><a href="<%= root_path %>">Return to Home Page</a></p>
+<script>
+    const flashNotice = "<%= j(flash[:notice]) %>";
+    console.log(flashNotice)
+    console.log(flashNotice === "Order successfully placed!")
+    if (flashNotice === "Order successfully placed!") {
+        localStorage.removeItem('cart');
+        console.log("Cart cleared from local storage after successful order.");
+    }
+</script>

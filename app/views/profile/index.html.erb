@@ -1,0 +1,116 @@
+<h1>Your Profile</h1>
+<h2>Your have: <%= current_user.savings %></h2>
+<h2>Create an Order</h2>
+<% if current_user.role == "admin" %>
+  <h2>All Orders</h2>
+  <%= form_with url: update_multiple_orders_path, method: :patch,  data: { turbo: "false" }, local: true do |f| %>
+    <table border="1" cellpadding="10">
+      <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>User</th>
+        <th>Previous Status</th>
+        <th>New Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.user.email %></td>
+          <td><%= order.order_status.humanize %></td> <!-- New column for previous status -->
+          <td>
+            <%= f.select "orders[#{order.id}][order_status]",
+                         Order.order_statuses.keys.map { |status| [status.humanize, status] },
+                         selected: order.order_status %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div>
+      <%= f.submit "Update All Statuses" %>
+    </div>
+  <% end %>
+<% end %>
+<div id="order-form-container">
+  <%= form_with url: create_order_profile_path, method: :post, local: true, id: 'order-form' do |form| %>1
+    <div id="order-items">
+
+    </div>
+    <div class="address-fields">
+      <h3>Delivery Address</h3>
+      <div>
+        <%= form.label :city, "City" %>
+        <%= form.text_field :city, required: true %>
+      </div>
+      <div>
+        <%= form.label :street, "Street" %>
+        <%= form.text_field :street, required: true %>
+      </div>
+      <div>
+        <%= form.label :post_index, "Post Index" %>
+        <%= form.text_field :post_index, required: true %>
+      </div>
+      <div>
+        <%= form.label :house_number, "House Number" %>
+        <%= form.text_field :house_number, required: true %>
+      </div>
+      <div>
+        <%= form.label :apartment_number, "Apartment Number" %>
+        <%= form.text_field :apartment_number %>
+      </div>
+    </div>
+    <div class="total-cost">
+      <h3>Total Cost: $<span id="total-cost">0.00</span></h3>
+    </div>
+    <div class="actions">
+      <%= form.submit "Submit Order" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+        const orderItemsContainer = document.getElementById('order-items');
+        const totalCostElement = document.getElementById("total-cost");
+        let totalCost = 0;
+
+        function updateTotalCost() {
+            totalCost = 0;
+
+            document.querySelectorAll(".flower-item").forEach((item) => {
+                const price = parseFloat(item.dataset.price);
+                console.log(price)
+                const quantity = parseInt(item.querySelector("input[type='number']").value, 10);
+                totalCost += price * quantity;
+            });
+            totalCostElement.textContent = totalCost.toFixed(2);
+        }
+
+        if (cartData.length === 0) {
+            orderItemsContainer.innerHTML = '<p>No items in your cart.</p>';
+        } else {
+            cartData.forEach(item => {
+                fetch(`/flowers/${item.id}.json`).then(response => response.json()).then(flower => {
+                    totalCost += flower.price * item.amount;
+                    totalCostElement.textContent = totalCost.toFixed(2);
+                    const flowerElement = `
+            <div class="flower-item" data-price=${flower.price}>
+              <label>${flower.name} (Price: $${flower.price})</label>
+              <input type="number" name="order[${flower.id}]" value="${item.amount}" min="1" required />
+
+            </div>
+          `;
+                    orderItemsContainer.insertAdjacentHTML('beforeend', flowerElement);
+                });
+            });
+        }
+        orderItemsContainer.addEventListener("input", function(event) {
+            if (event.target.matches("input[type='number']")) {
+                updateTotalCost();
+            }
+        });
+    });
+</script>
