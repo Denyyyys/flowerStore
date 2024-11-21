@@ -1,45 +1,68 @@
-<h2>Sign up</h2>
+<div class="flex items-center justify-center">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mt-10 mx-auto md:min-h-screen lg:py-0 max-w-8xl w-full">
+    <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+      <img class="w-8 h-8 mr-2" src="/lavender.png" alt="logo">
+      <p class="text-white">FlowerStore</p>
+    </a>
+    <div class="w-full rounded-lg shadow  md:mt-0 xl:p-0 bg-gray-800" style="max-width: 740px;">
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-white">
+          Create new account
+        </h1>
+<%= form_for(resource, as: resource_name, class: "space-y-4 md:space-y-6", url: registration_path(resource_name)) do |f| %>
+  <%#= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="flex ">
+    <div class="w-1/2 field mb-5 mr-5">
+      <%= f.label :username, class: "block text-sm mb-2 font-medium text-gray-900 text-white" %>
+      <%= f.text_field :username, autofocus: true, class: " border rounded-lg   block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500", placeholder: "coolRoman" %>
+    </div>
 
+    <div class="w-1/2 field mb-5">
+      <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900 text-white" %>
+      <%= f.email_field :email, autocomplete: "email", class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500", placeholder: "your@email.com" %>
+    </div>
+  </div>
+      <div class="flex ">
+        <div class="w-1/2 field mb-5 mr-5">
+          <%= f.label :first_name, class: "block mb-2 text-sm font-medium text-gray-900 text-white" %>
+          <%= f.text_field :first_name, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500", placeholder: "Roman" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true %>
+        <div class="w-1/2 field mb-5">
+          <%= f.label :last_name, class: "block mb-2 text-sm font-medium text-gray-900 text-white" %>
+          <%= f.text_field :last_name, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500", placeholder: "Katamai" %>
+        </div>
+      </div>
+
+<div class="flex">
+
+  <div class="field mb-5 mr-5 w-1/2">
+    <label for="user_password" class="block mb-2 text-sm font-medium text-gray-900 text-white" >
+    <span class="text-sm">Password</span>  <% if @minimum_password_length %>
+    <em class="text-white text-xs">(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
+    </label>
+    <%= f.password_field :password, autocomplete: "new-password", class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500", placeholder: "••••••••" %>
   </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
+  <div class="field mb-5 w-1/2">
+    <%= f.label :password_confirmation, class: "block mb-2 text-sm font-medium text-gray-900 text-white" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500", placeholder: "••••••••" %>
   </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+</div>
 
   <div class="actions">
-    <%= f.submit "Sign up", data: {turbo: false} %>
+    <button class="w-full text-white hover:bg-indigo-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-indigo-600 mt-3">
+      <%= f.submit "Sign Up", data: {turbo: false} %>
+    </button>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+          Do you have an account already?
+          <%= link_to "Sign In", new_session_path(resource_name), class: "font-medium hover:underline text-blue-600" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
