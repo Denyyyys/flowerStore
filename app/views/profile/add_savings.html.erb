@@ -1,10 +1,10 @@
-<h1>Add Savings</h1>
+<h1 class="text-4xl mb-10">Add Savings To Your Account</h1>
 <%= form_with url: update_savings_profile_path, method: :patch, local: true do |form| %>
-  <div class="field">
-    <%= form.label :savings, "Enter amount to add" %>
-    <%= form.number_field :savings, step: 2, min: 0, value: 10, required: true %>
+  <div class="field flex">
+    <%= form.label :savings, "Enter amount of ₴ to add", class: "text-3xl flex w-1/2" %>
+    <%= form.number_field :savings, step: 2, min: 0, value: 10, required: true, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500  flex w-1/2" %>
   </div>
-  <div class="actions">
+  <div class="actions mt-10 submit-button text-white hover:bg-indigo-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-indigo-600" style="cursor: pointer; width: 100%">
     <%= form.submit "Add Savings" %>
   </div>
 <% end %>

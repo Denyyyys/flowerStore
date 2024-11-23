@@ -19,7 +19,45 @@
   </head>
 
   <body class="bg-gray-900">
-    <%= render partial: "shared/notifications", locals: {message: flash[:notice], type: flash[:type] || "success"} %>
-    <%= yield %>
+  <section class="flex flex-col min-h-screen">
+
+
+  <% if !devise_controller? %>
+    <nav class="w-screen text-white bg-blue-900">
+      <div class="max-w-screen-xl w-screen flex flex-wrap justify-between px-4 py-2 mx-auto">
+        <ul class="flex space-x-4 items-center">
+          <a href="/">
+          <img src="/lavender.png" alt="logo img" style="max-height: 60px;" />
+          </a>
+        </ul>
+        <ul class="flex space-x-4 items-center">
+          <% if user_signed_in? %>
+            <% if current_user && current_user.role == "admin" %>
+              <%= link_to "Create New Flower", new_flower_path %>
+           <% end %>
+            <a href="/profile" data-turbo="false">Profile / Cart</a>
+            <li>  <%= button_to destroy_user_session_path, method: :delete, class: 'btn btn-danger' do %>
+                Log Out
+              <% end %>
+            </li>
+
+          <% else %>
+            <li><%= link_to 'Log In', new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  <% end %>
+  <%= render partial: "shared/notifications", locals: {message: flash[:notice], type: flash[:type] || "success"} %>
+    <main class="w-screen">
+      <div class="max-w-screen-xl w-screen px-4 py-6 mx-auto text-white">
+
+
+      <%= yield %>
+        </div>
+    </main>
+
+  </section>
+
   </body>
 </html>

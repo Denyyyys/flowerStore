@@ -1,6 +1,15 @@
-<h1>Your Profile</h1>
-<h2>Your have: <%= current_user.savings %></h2>
-<h2>Create an Order</h2>
+
+<h1 class="text-4xl">Hello, <% if current_user.role == "admin" %> admin <% end %> <%= current_user.first_name %>!</h1>
+<% if current_user.role == "user" %>
+  <h2 class="text-2xl mt-3">Your have: <%= current_user.savings %>₴. <a href="/profile/add_savings" >Click <span class="text-blue-700">here</span> to add money</a></h2>
+<% end %>
+
+<div class="justify-center mt-10 bg-gray-800 rounded-lg max-w-2xl mx-auto" style="padding-left: 40px;padding-right: 40px;">
+  <div class="py-5">
+    <% if current_user.role == "user" %>
+      <h2 class="text-2xl text-center mb-2">Create An Order</h2>
+      <h2 class="text-xl text-center mb-2">Your Cart</h2>
+      <% end %>
 <% if current_user.role == "admin" %>
   <h2>All Orders</h2>
   <%= form_with url: update_multiple_orders_path, method: :patch,  data: { turbo: "false" }, local: true do |f| %>
@@ -18,58 +27,58 @@
         <tr>
           <td><%= order.id %></td>
           <td><%= order.user.email %></td>
-          <td><%= order.order_status.humanize %></td> <!-- New column for previous status -->
+          <td><%= order.order_status.humanize %></td>
           <td>
             <%= f.select "orders[#{order.id}][order_status]",
                          Order.order_statuses.keys.map { |status| [status.humanize, status] },
-                         selected: order.order_status %>
+                         {selected: order.order_status},
+                         {class: " border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"}%>
           </td>
         </tr>
       <% end %>
       </tbody>
     </table>
     <div>
-      <%= f.submit "Update All Statuses" %>
+
+      <%= f.submit "Update All Statuses", class: "bg-blue-800 p-2 rounded-lg mt-5 hover:cursor-pointer", style: "width: 100%; cursor: pointer" %>
     </div>
   <% end %>
 <% end %>
-<div id="order-form-container">
-  <%= form_with url: create_order_profile_path, method: :post, local: true, id: 'order-form' do |form| %>1
-    <div id="order-items">
+    <% if current_user.role == "user" %>
+  <div id="order-form-container">
+    <%= form_with url: create_order_profile_path, method: :post, local: true, id: 'order-form' do |form| %>
+      <div id="order-items">
 
-    </div>
-    <div class="address-fields">
-      <h3>Delivery Address</h3>
-      <div>
-        <%= form.label :city, "City" %>
-        <%= form.text_field :city, required: true %>
       </div>
-      <div>
-        <%= form.label :street, "Street" %>
-        <%= form.text_field :street, required: true %>
+        <h3 class="text-xl mb-5 text-center">Delivery Address</h3>
+        <%= form.label :city, "City", class: "mt-3 block mb-2 text-sm font-medium text-gray-900 text-white" %>
+        <%= form.text_field :city, required: true, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"%>
+        <%= form.label :street, "Street", class: "mt-3 block mb-2 text-sm font-medium text-gray-900 text-white" %>
+        <%= form.text_field :street, required: true, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" %>
+        <div>
+          <%= form.label :post_index, "Post Index", class: "mt-3 block mb-2 text-sm font-medium text-gray-900 text-white" %>
+          <%= form.text_field :post_index, required: true, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" %>
+        </div>
+        <div>
+          <%= form.label :house_number, "House Number", class: "mt-3 block mb-2 text-sm font-medium text-gray-900 text-white" %>
+          <%= form.text_field :house_number, required: true, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" %>
+        </div>
+        <div>
+          <%= form.label :apartment_number, "Apartment Number", class: "mt-3 block mb-2 text-sm font-medium text-gray-900 text-white" %>
+          <%= form.text_field :apartment_number, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" %>
+        </div>
       </div>
-      <div>
-        <%= form.label :post_index, "Post Index" %>
-        <%= form.text_field :post_index, required: true %>
+      <div class="total-cost mt-3">
+        <h3>Total Cost: $<span id="total-cost">0.00</span></h3>
       </div>
-      <div>
-        <%= form.label :house_number, "House Number" %>
-        <%= form.text_field :house_number, required: true %>
+      <div class="actions mt-5 submit-button text-white hover:bg-indigo-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-indigo-600" style="cursor: pointer; width: 100%">
+        <button type="submit" name="commit" value="Submit Order">Submit Order</button>
+        <%#= form.submit "Submit Order" %>
       </div>
-      <div>
-        <%= form.label :apartment_number, "Apartment Number" %>
-        <%= form.text_field :apartment_number %>
-      </div>
-    </div>
-    <div class="total-cost">
-      <h3>Total Cost: $<span id="total-cost">0.00</span></h3>
-    </div>
-    <div class="actions">
-      <%= form.submit "Submit Order" %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+    <% end %>
 </div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const cartData = JSON.parse(localStorage.getItem('cart')) || [];
@@ -78,38 +87,76 @@
         let totalCost = 0;
 
         function updateTotalCost() {
-            totalCost = 0;
+            let UpdatedTotalCost = 0;
 
             document.querySelectorAll(".flower-item").forEach((item) => {
                 const price = parseFloat(item.dataset.price);
-                console.log(price)
                 const quantity = parseInt(item.querySelector("input[type='number']").value, 10);
-                totalCost += price * quantity;
+                UpdatedTotalCost += price * quantity;
             });
-            totalCostElement.textContent = totalCost.toFixed(2);
+            return UpdatedTotalCost;
+        }
+
+        function renderCart() {
+            totalCost = 0;
+            orderItemsContainer.innerHTML = '';
+            if (cartData.length === 0) {
+                orderItemsContainer.innerHTML = '<p>No items in your cart.</p>';
+                totalCostElement.textContent = "0.00";
+                return;
+            }
+
+            cartData.forEach((item, index) => {
+                fetch(`/flowers/${item.id}.json`)
+                    .then(response => response.json())
+                    .then(flower => {
+                        totalCost += flower.price * item.amount;
+                        totalCostElement.textContent = totalCost.toFixed(2);
+                        const flowerElement = `
+                        <div class="flex flower-item mb-5" data-price="${flower.price}">
+                            <div class="flex-grow">
+                                <label class="block mb-2 text-sm font-medium text-white text-lg">${flower.name} (Price: $${flower.price})</label>
+<div class="flex">
+
+                                <input type="number" name="order[${flower.id}]" value="${item.amount}" min="1" required
+                                    class="flex w-1/2 border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" />
+                   <button data-index="${index}" class="flex w-1/2 delete-flower-button bg-red-600 text-white rounded-lg px-4 py-2 ml-3">Delete</button>
+</div>
+                            </div>
+
+                        </div>
+                        `;
+                        orderItemsContainer.insertAdjacentHTML('beforeend', flowerElement);
+                    });
+            });
+        }
+
+        function deleteFlower(index) {
+            cartData.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cartData));
+            renderCart();
         }
 
         if (cartData.length === 0) {
             orderItemsContainer.innerHTML = '<p>No items in your cart.</p>';
         } else {
-            cartData.forEach(item => {
-                fetch(`/flowers/${item.id}.json`).then(response => response.json()).then(flower => {
-                    totalCost += flower.price * item.amount;
-                    totalCostElement.textContent = totalCost.toFixed(2);
-                    const flowerElement = `
-            <div class="flower-item" data-price=${flower.price}>
-              <label>${flower.name} (Price: $${flower.price})</label>
-              <input type="number" name="order[${flower.id}]" value="${item.amount}" min="1" required />
-
-            </div>
-          `;
-                    orderItemsContainer.insertAdjacentHTML('beforeend', flowerElement);
-                });
-            });
+            renderCart();
         }
-        orderItemsContainer.addEventListener("input", function(event) {
+
+        orderItemsContainer.addEventListener("input", function (event) {
             if (event.target.matches("input[type='number']")) {
-                updateTotalCost();
+                const index = Array.from(orderItemsContainer.querySelectorAll(".flower-item")).indexOf(event.target.closest(".flower-item"));
+                cartData[index].amount = parseInt(event.target.value, 10);
+                localStorage.setItem('cart', JSON.stringify(cartData));
+                totalCost = updateTotalCost();
+                totalCostElement.textContent = totalCost.toFixed(2);
+            }
+        });
+
+        orderItemsContainer.addEventListener("click", function (event) {
+            if (event.target.matches(".delete-flower-button")) {
+                const index = parseInt(event.target.dataset.index, 10);
+                deleteFlower(index);
             }
         });
     });

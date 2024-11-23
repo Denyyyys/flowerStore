@@ -2,36 +2,33 @@
 
 <% content_for :title, "Flowers" %>
 
-<h1>Flowers </h1>
+<h1 class="text-4xl">Our Flowers</h1>
 
-<div id="flowers">
+<div id="flowers" style="display: grid; grid-template-columns: repeat( auto-fit, minmax(300px, 1fr)); grid-gap: 20px; align-items: stretch;">
   <% @flowers.each do |flower| %>
-    <%= render flower %>
-    <p>
-      <%= link_to "Show this flower", flower %>
-    </p>
+    <% if flower.stock != 0 %>
+    <%= render partial: flower, :locals => {:show_in_main => true} %>
+      <% end %>
   <% end %>
 </div>
 
-<br/>
-<% if user_signed_in? %>
-  <p>Welcome, <%= current_user.first_name %> <%= current_user.last_name %>!</p>
-  <!-- or simply use current_user.username if you prefer that -->
-  <%= button_to 'Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-  <br/>
-  <br/>
-  <br/>
+<!--<br/>-->
+<%# if user_signed_in? %>
+<!--  <p>Welcome, <%#= current_user.first_name %> <%#= current_user.last_name %>!</p>-->
+  <%#= button_to 'Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+<!--  <br/>-->
+<!--  <br/>-->
+<!--  <br/>-->
 
-<% else %>
-    <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary' %>
-  <br/>
-  <br/>
-  <br/>
-    <%= link_to 'Log In', new_user_session_path, class: 'btn btn-success' %>
-  <br/>
+<%# else %>
+    <%#= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary' %>
+<!--  <br/>-->
+<!--  <br/>-->
+<!--  <br/>-->
+    <%#= link_to 'Log In', new_user_session_path, class: 'btn btn-success' %>
+<!--  <br/>-->
 
-<% end %>
+<%# end %>
 
-<br/>
+<!--<br/>-->
 
-<%= link_to "New flower", new_flower_path %>

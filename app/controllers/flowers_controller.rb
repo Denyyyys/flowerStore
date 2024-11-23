@@ -36,6 +36,7 @@ class FlowersController < ApplicationController
 
   # GET /flowers/1/edit
   def edit
+
   end
 
   # POST /flowers or /flowers.json
@@ -68,10 +69,16 @@ class FlowersController < ApplicationController
 
   # DELETE /flowers/1 or /flowers/1.json
   def destroy
+    @flower = Flower.find(params[:id])
     @flower.destroy!
+    # if @flower.destroy
+    #   redirect_to root_path, notice: 'Product successfully deleted.'
+    # else
+    #   redirect_to flowers_path, alert: 'Failed to delete product.'
+    # end
 
     respond_to do |format|
-      format.html { redirect_to flowers_path, status: :see_other, notice: "Flower was successfully destroyed." }
+      format.html { redirect_to root_path, notice: "Flower was successfully destroyed." }
       format.json { head :no_content }
     end
   end

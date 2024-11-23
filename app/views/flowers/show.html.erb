@@ -1,14 +1,53 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @flower %>
-
+<div id="<%= dom_id @flower %>" class="mt-6" style="display: flex; flex-direction: column; height: 100%;">
 <%= form_with url: add_to_cart_flower_path(@flower), method: :post, html: { id: "add-to-cart-form" } do |f| %>
-  <div>
-    <label for="amount">Amount:</label>
-    <%= number_field_tag :amount, 1, min: 1, max: @flower.stock, required: true, class: "amount-field", data: { behavior: 'set-amount' } %>
-  </div>
-  <%= button_tag submit_tag 'Add to Cart', class: 'submit-button', style: 'cursor: pointer' %>
+    <div class="max-w-sm p-6 bg-blue-900   rounded-lg">
+      <a href="#">
+        <h5 class=" mb-2 text-2xl font-bold tracking-tight text-white"><%= @flower.name %></h5>
+      </a>
+      <%= image_tag(@flower.image,  alt: "#{@flower.name} image", class: "rounded-lg h-80 object-cover", style: "width: 100%;") %>
+      <p class="mb-3 font-normal text-gray-400 mt-3"><%= @flower.description %></p>
+      <div class="flex justify-between items-center">
+        <div class="text-sm text-gray-600">
+          <span class="font-semibold text-white">Stock: <%= @flower.stock %> </span>
+        </div>
+        <div class="text-sm text-white font-semibold">
+          <%= @flower.price %>₴
+        </div>
+      </div>
+      <% if current_user.role == "user" %>
+        <div class="field">
+            <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 text-white">Amount To Buy:</label>
+            <%= number_field_tag :amount, 1, min: 1, max: @flower.stock, required: true, class: "amount-field border rounded-lg   block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500", data: { behavior: 'set-amount' } %>
+        </div>
+      <% end %>
+      <% if current_user.role == "admin" %>
+        <div class=" flex gap-5">
+          <div class="flex w-1/2">
+
+            <%= link_to "Edit this flower", edit_flower_path(@flower), class: "bg-blue-800 p-2 rounded-lg mt-5 hover:cursor-pointer text-center", style: "width: 100%; cursor: pointer;"%>
+          </div>
+            <div class="flex w-1/2">
+          <%= button_to "Destroy this flower", @flower, method: :delete, class: "bg-blue-800 p-2 rounded-lg mt-5 text-center hover:cursor-pointer", style: "width: 100%;" %>
+
+          </div>
+
+        </div>
+    <div class=" flex gap-5">
+        <a href="/" class="bg-blue-800 p-2 rounded-lg mt-5 text-center hover:cursor-pointer" style="width: 100%;" >Back To Flowers</a>
+
+    </div>
+      <% else if current_user.role == "user" %>
+          <%= button_tag 'Add to Cart', class: "mt-5 submit-button text-white hover:bg-indigo-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-indigo-600", style: 'cursor: pointer; width: 100%' %>
+
+    <% end %>
+     <%end %>
+      </div>
+
+    </div>
+
 <% end %>
+</div>
+
 <script>
     function setAmountField() {
         const amountField = document.querySelector('[data-behavior="set-amount"]');
@@ -68,13 +107,3 @@
         attachFormListener();
     });
 </script>
-
-<br/>
-<br/>
-<br/>
-<div>
-  <%= link_to "Edit this flower", edit_flower_path(@flower) %> |
-  <%= link_to "Back to flowers", flowers_path %>
-
-  <%= button_to "Destroy this flower", @flower, method: :delete %>
-</div>

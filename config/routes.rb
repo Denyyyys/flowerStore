@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   resources :flowers do
     post 'add_to_cart', on: :member
+    # delete 'destroy', on: :member
+    # patch 'update', on: :member
+    # put 'update', on: :member
+
   end
 
   get '/profile', to: 'profile#index', as: 'profile_path'
