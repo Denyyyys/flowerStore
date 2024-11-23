@@ -202,101 +202,101 @@
   </component>
   <component name="RailsPaths" isManagedAutomatically="true">
     <entry key="app">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\app</value>
+      <value>file://$MODULE_DIR$/../flowerStore\app</value>
     </entry>
     <entry key="app/assets">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\app/assets</value>
+      <value>file://$MODULE_DIR$/../flowerStore\app/assets</value>
     </entry>
     <entry key="app/channels">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\app/channels</value>
+      <value>file://$MODULE_DIR$/../flowerStore\app/channels</value>
     </entry>
     <entry key="app/controllers">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\app/controllers</value>
+      <value>file://$MODULE_DIR$/../flowerStore\app/controllers</value>
     </entry>
     <entry key="app/helpers">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\app/helpers</value>
+      <value>file://$MODULE_DIR$/../flowerStore\app/helpers</value>
     </entry>
     <entry key="app/mailers">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\app/mailers</value>
+      <value>file://$MODULE_DIR$/../flowerStore\app/mailers</value>
     </entry>
     <entry key="app/models">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\app/models</value>
+      <value>file://$MODULE_DIR$/../flowerStore\app/models</value>
     </entry>
     <entry key="app/views">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\app/views</value>
+      <value>file://$MODULE_DIR$/../flowerStore\app/views</value>
     </entry>
     <entry key="config">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config</value>
     </entry>
     <entry key="config/cable">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config/cable.yml</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config/cable.yml</value>
     </entry>
     <entry key="config/database">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config/database.yml</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config/database.yml</value>
     </entry>
     <entry key="config/environment">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config/environment.rb</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config/environment.rb</value>
     </entry>
     <entry key="config/environments">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config/environments</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config/environments</value>
     </entry>
     <entry key="config/initializers">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config/initializers</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config/initializers</value>
     </entry>
     <entry key="config/locales">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config/locales</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config/locales</value>
     </entry>
     <entry key="config/routes">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config/routes</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config/routes</value>
     </entry>
     <entry key="config/routes.rb">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\config/routes.rb</value>
+      <value>file://$MODULE_DIR$/../flowerStore\config/routes.rb</value>
     </entry>
     <entry key="db">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\db</value>
+      <value>file://$MODULE_DIR$/../flowerStore\db</value>
     </entry>
     <entry key="db/migrate">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\db/migrate</value>
+      <value>file://$MODULE_DIR$/../flowerStore\db/migrate</value>
     </entry>
     <entry key="db/seeds.rb">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\db/seeds.rb</value>
+      <value>file://$MODULE_DIR$/../flowerStore\db/seeds.rb</value>
     </entry>
     <entry key="lib">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\lib</value>
+      <value>file://$MODULE_DIR$/../flowerStore\lib</value>
     </entry>
     <entry key="lib/assets">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\lib/assets</value>
+      <value>file://$MODULE_DIR$/../flowerStore\lib/assets</value>
     </entry>
     <entry key="lib/tasks">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\lib/tasks</value>
+      <value>file://$MODULE_DIR$/../flowerStore\lib/tasks</value>
     </entry>
     <entry key="lib/templates">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\lib/templates</value>
+      <value>file://$MODULE_DIR$/../flowerStore\lib/templates</value>
     </entry>
     <entry key="log">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\log/development.log</value>
+      <value>file://$MODULE_DIR$/../flowerStore\log/development.log</value>
     </entry>
     <entry key="public">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\public</value>
+      <value>file://$MODULE_DIR$/../flowerStore\public</value>
     </entry>
     <entry key="public/javascripts">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\public/javascripts</value>
+      <value>file://$MODULE_DIR$/../flowerStore\public/javascripts</value>
     </entry>
     <entry key="public/stylesheets">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\public/stylesheets</value>
+      <value>file://$MODULE_DIR$/../flowerStore\public/stylesheets</value>
     </entry>
     <entry key="test/mailers/previews">
       <value>file://$MODULE_DIR$/test/mailers/previews</value>
-      <value>file://$MODULE_DIR$/../flowerStoreIF\test/mailers/previews</value>
+      <value>file://$MODULE_DIR$/../flowerStore\test/mailers/previews</value>
     </entry>
     <entry key="tmp">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\tmp</value>
+      <value>file://$MODULE_DIR$/../flowerStore\tmp</value>
     </entry>
     <entry key="vendor">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\vendor</value>
+      <value>file://$MODULE_DIR$/../flowerStore\vendor</value>
     </entry>
     <entry key="vendor/assets">
-      <value>file://$MODULE_DIR$/../flowerStoreIF\vendor/assets</value>
+      <value>file://$MODULE_DIR$/../flowerStore\vendor/assets</value>
     </entry>
   </component>
   <component name="RakeTasksCache-v2">
