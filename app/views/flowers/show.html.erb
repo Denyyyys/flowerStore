@@ -44,29 +44,31 @@
       </div>
 
     </div>
+    <div class="max-w-sm p-6 bg-blue-900 rounded-lg mt-5">
     <%= form_with model: [@flower, Comment.new], local: true do |form| %>
-      <div>
-        <%= form.label :body, "Comment" %><br>
-        <%= form.text_area :body, required: true %>
+      <div class="mt-5">
+        <%= form.label :body, "Add Comment", class: "text-2xl" %><br>
+        <%= form.text_area :body, required: true, class: "border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500", rows: 5 %>
       </div>
       <div>
-        <%= form.submit "Create Comment" %>
+        <%= form.submit "Create Comment", class: "mb-10 mt-5 submit-button text-white hover:bg-indigo-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-indigo-600", style: 'cursor: pointer; width: 100%' %>
       </div>
     <% end %>
 
     <div id="comments">
+      <h1 class="text-2xl mb-4">Comments</h1>
       <% @flower.comments.includes(:user).each do |comment| %>
-        <div class="comment">
-          <p>
+        <div class="comment bg-gray-500 rounded-lg p-1 mb-5">
+          <p class="mb-2">
             <strong>
               <%= comment.user.first_name %> <%= comment.user.last_name %>
             </strong>
             (<%= comment.created_at.strftime("%B %d, %Y") %>)
           </p>
-          <p><%= comment.body %></p>
+          <p class="mb-3"><%= comment.body %></p>
         </div>
-        <hr>
       <% end %>
+    </div>
     </div>
 <% end %>
 </div>
