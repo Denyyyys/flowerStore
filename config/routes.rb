@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :flowers do
     post 'add_to_cart', on: :member
+    resources :comments, only: [:create]
+
     # delete 'destroy', on: :member
     # patch 'update', on: :member
     # put 'update', on: :member

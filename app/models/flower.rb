@@ -1,6 +1,7 @@
 class Flower < ApplicationRecord
   has_one_attached :image
   has_many :order_items
+  has_many :comments, dependent: :destroy
 
   validates :name, presence: true
   validates :description, presence: true

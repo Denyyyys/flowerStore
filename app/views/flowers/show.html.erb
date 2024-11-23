@@ -44,9 +44,58 @@
       </div>
 
     </div>
+    <%= form_with model: [@flower, Comment.new], local: true do |form| %>
+      <div>
+        <%= form.label :body, "Comment" %><br>
+        <%= form.text_area :body, required: true %>
+      </div>
+      <div>
+        <%= form.submit "Create Comment" %>
+      </div>
+    <% end %>
 
+    <div id="comments">
+      <% @flower.comments.includes(:user).each do |comment| %>
+        <div class="comment">
+          <p>
+            <strong>
+              <%= comment.user.first_name %> <%= comment.user.last_name %>
+            </strong>
+            (<%= comment.created_at.strftime("%B %d, %Y") %>)
+          </p>
+          <p><%= comment.body %></p>
+        </div>
+        <hr>
+      <% end %>
+    </div>
 <% end %>
 </div>
+
+<!--  <hr>-->
+
+<!--  <h2>Comments</h2>-->
+
+  <%#= form_with model: [@flower, Comment.new], local: true do |form| %>
+    <%#= form.hidden_field :user_first_name, value: current_user.first_name %>
+    <%#= form.hidden_field :user_last_name, value: current_user.last_name %>
+<!--    <div>-->
+<!--      <%#= form.label :body, "Comment" %><br>-->
+      <%#= form.text_area :body %>
+<!--    </div>-->
+<!--    <div>-->
+      <%#= form.submit "Create Comment" %>
+<!--    </div>-->
+  <%# end %>
+
+<!--  <div id="comments">-->
+    <%# @flower.comments.each do |comment| %>
+<!--      <div class="comment">-->
+<!--        <p><strong><%#= comment.user_first_name %> <%#= comment.user_last_name %></strong> (<%#= comment.created_at.strftime("%B %d, %Y") %>)</p>-->
+<!--        <p><%#= comment.body %></p>-->
+<!--      </div>-->
+<!--      <hr>-->
+    <%# end %>
+<!--  </div>-->
 
 <script>
     function setAmountField() {
